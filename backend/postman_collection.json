@@ -1,0 +1,278 @@
+{
+  "info": {
+    "name": "Agritech API",
+    "description": "Complete API collection for Agritech platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Signup Buyer",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"buyer@test.com\",\n  \"password\": \"password123\",\n  \"name\": \"John Buyer\",\n  \"role\": \"buyer\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/signup",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "signup"]
+            }
+          }
+        },
+        {
+          "name": "Signup Farmer",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"farmer@test.com\",\n  \"password\": \"password123\",\n  \"name\": \"Jane Farmer\",\n  \"role\": \"farmer\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/signup",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "signup"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"buyer@test.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Buyer",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{buyer_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/buyer/profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "buyer", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile with Location",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{buyer_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"address\": \"123 Main Street, New York, NY\",\n  \"latitude\": 40.7128,\n  \"longitude\": -74.0060\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/buyer/profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "buyer", "profile"]
+            }
+          }
+        },
+        {
+          "name": "Get My Orders",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{buyer_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/buyer/orders",
+              "host": ["{{base_url}}"],
+              "path": ["api", "buyer", "orders"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Farmer",
+      "item": [
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{farmer_token}}"}],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {"key": "image", "type": "file"},
+                {"key": "name", "value": "Organic Tomatoes", "type": "text"},
+                {"key": "description", "value": "Fresh organic tomatoes", "type": "text"},
+                {"key": "price", "value": "5.99", "type": "text"},
+                {"key": "quantity", "value": "100", "type": "text"},
+                {"key": "unit", "value": "kg", "type": "text"},
+                {"key": "category", "value": "vegetables", "type": "text"}
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/farmer/product",
+              "host": ["{{base_url}}"],
+              "path": ["api", "farmer", "product"]
+            }
+          }
+        },
+        {
+          "name": "Get My Products",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{farmer_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/farmer/products",
+              "host": ["{{base_url}}"],
+              "path": ["api", "farmer", "products"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{farmer_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/farmer/profile",
+              "host": ["{{base_url}}"],
+              "path": ["api", "farmer", "profile"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Place Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{buyer_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"product_id\": \"PRODUCT_UUID_HERE\",\n  \"quantity\": 5,\n  \"buyer_address\": \"123 Main Street, NY\",\n  \"buyer_latitude\": 40.7128,\n  \"buyer_longitude\": -74.0060,\n  \"notes\": \"Deliver in morning\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Farmer Orders",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{farmer_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/orders/farmer",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders", "farmer"]
+            }
+          }
+        },
+        {
+          "name": "Get Order Details with Map",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{farmer_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/orders/ORDER_UUID_HERE",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders", "ORDER_UUID_HERE"]
+            }
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Authorization", "value": "Bearer {{farmer_token}}"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"accepted\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/orders/ORDER_UUID_HERE/status",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders", "ORDER_UUID_HERE", "status"]
+            }
+          }
+        },
+        {
+          "name": "Browse All Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/orders/products?available=true",
+              "host": ["{{base_url}}"],
+              "path": ["api", "orders", "products"],
+              "query": [
+                {"key": "available", "value": "true"},
+                {"key": "category", "value": "vegetables", "disabled": true}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Farmer Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{farmer_token}}"}],
+            "url": {
+              "raw": "{{base_url}}/api/analytics/dashboard",
+              "host": ["{{base_url}}"],
+              "path": ["api", "analytics", "dashboard"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{base_url}}/api/health",
+          "host": ["{{base_url}}"],
+          "path": ["api", "health"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {"key": "base_url", "value": "http://localhost:5000"},
+    {"key": "buyer_token", "value": ""},
+    {"key": "farmer_token", "value": ""}
+  ]
+}

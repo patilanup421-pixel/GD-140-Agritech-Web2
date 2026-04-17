@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Marketplace - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div id="global-loader" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-color); display:flex; justify-content:center; align-items:center; z-index:9999;">
+        <i class="fa-solid fa-spinner fa-spin fa-3x" style="color:var(--primary-color);"></i>
+    </div>
+
+    <div id="navbar-container"></div>
+
+    <main style="padding-top: 80px;">
+        <div class="dashboard-layout">
+            <aside class="sidebar">
+                <div class="sidebar-user">
+                    <img id="dashSidebarImg" src="" alt="User avatar">
+                    <h3 id="dashSidebarName">User</h3>
+                    <span id="dashSidebarRole" class="badge badge-primary">Role</span>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="dashboard.html" class="sidebar-link active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                    <a href="orders.html" class="sidebar-link"><i class="fa-solid fa-box-open"></i> Orders</a>
+                    <a href="profile.html" class="sidebar-link"><i class="fa-solid fa-user"></i> Profile</a>
+                </nav>
+            </aside>
+
+            <section class="dashboard-main">
+                <h1 style="font-size: 2rem; margin-bottom: 1.25rem;">My Dashboard</h1>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i id="stat1Icon" class="fa-solid fa-sack-dollar"></i></div>
+                        <div class="stat-content">
+                            <h4 id="stat1Title">Total Sales</h4>
+                            <h2 id="stat1Val">$0.00</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i id="stat2Icon" class="fa-solid fa-wheat-awn"></i></div>
+                        <div class="stat-content">
+                            <h4 id="stat2Title">Active Products</h4>
+                            <h2 id="stat2Val">0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-container mb-4">
+                    <div class="table-header">
+                        <h3>Recent Orders</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentOrdersBody"></tbody>
+                    </table>
+                </div>
+
+                <section id="farmerProductsSection" style="display: none;">
+                    <div class="card mb-4">
+                        <h3>Add Product</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Upload product image, name, and price from your dashboard.</p>
+                        <form id="farmerAddProductForm" class="farmer-product-form">
+                            <div class="form-group">
+                                <label for="farmerProductImage">Product Image</label>
+                                <input id="farmerProductImage" type="file" class="form-control" accept="image/*" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="farmerProductName">Product Name</label>
+                                <input id="farmerProductName" type="text" class="form-control" placeholder="Fresh Tomatoes" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="farmerProductPrice">Price (USD)</label>
+                                <input id="farmerProductPrice" type="number" class="form-control" min="0.01" step="0.01" placeholder="10.99" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </form>
+                    </div>
+
+                    <h3 class="mb-2">My Products</h3>
+                    <div id="farmerProductsGrid" class="dashboard-product-grid"></div>
+                </section>
+
+                <section id="buyerRecommendationsSection" style="display: none;">
+                    <h3 class="mb-2">Recommended For You</h3>
+                    <div id="buyerRecsGrid" class="dashboard-product-grid"></div>
+                </section>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
